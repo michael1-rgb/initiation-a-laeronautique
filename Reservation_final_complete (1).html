@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation de Cours d'Aéronautique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #004080;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            background: #004080;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #003366;
+        }
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #004080;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 50px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu-content p {
+            margin: 0;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        .policy {
+            background: #e6ffe6;
+            color: green;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+<div class="menu-content" id="menuContent">
+    <p>Navigation aérienne</p>
+    <p>Météorologie aéronautique</p>
+    <p>Principes du vol</p>
+    <p>Aérodynamique</p>
+    <p>Services d'information aéronautique</p>
+    <p>Performances et limitations humaines</p>
+    <p>Facteurs humains</p>
+    <p>Réglementation aérienne</p>
+</div>
+
+<div class="container">
+    <h1>Réservez un Cours d'Aéronautique</h1>
+    <form id="reservationForm">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="entry.123456789" required>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="entry.987654321" required>
+
+        <label for="phone">Téléphone :</label>
+        <input type="tel" id="phone" name="entry.112233445" required>
+
+        <label for="course">Cours :</label>
+        <select id="course" name="entry.556677889" required>
+            <option value="Navigation aérienne">Navigation aérienne</option>
+            <option value="Météorologie aéronautique">Météorologie aéronautique</option>
+            <option value="Principes du vol">Principes du vol</option>
+            <option value="Aérodynamique">Aérodynamique</option>
+            <option value="Services d'information aéronautique">Services d'information aéronautique</option>
+            <option value="Performances et limitations humaines">Performances et limitations humaines</option>
+            <option value="Facteurs humains">Facteurs humains</option>
+            <option value="Réglementation aérienne">Réglementation aérienne</option>
+        </select>
+
+        <label for="study_hours">Heures d'étude souhaitées :</label>
+        <input type="text" id="study_hours" name="entry.998877665" required>
+
+        <label for="comments">Commentaires :</label>
+        <textarea id="comments" name="entry.445566778"></textarea>
+
+        <button type="submit" class="button">Réserver</button>
+    </form>
+
+    <p id="confirmationMessage" style="display:none; color: green;">Votre réservation a été envoyée avec succès !</p>
+
+    <div class="policy">
+        <p>Chaque cours coûte 7.3$. Il est possible de payer en deux tranches de 4$ et 3$, mais le paiement doit être complété avant la fin du cours.</p>
+        <p>Nous avons adopté cette politique pour garantir l’engagement des étudiants et faciliter l’organisation des sessions avec nos instructeurs.</p>
+    </div>
+</div>
+
+<script>
+function toggleMenu() {
+    var menuContent = document.getElementById("menuContent");
+    menuContent.style.display = menuContent.style.display === "block" ? "none" : "block";
+}
+
+document.getElementById("reservationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var formData = new FormData(document.getElementById("reservationForm"));
+
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLScFJOS_jLAc1sThpDQGCQte1Xzk6c8ELtpppihgAYs1SFo95Q/formResponse", {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+    }).then(() => {
+        document.getElementById("confirmationMessage").style.display = "block";
+        document.getElementById("reservationForm").reset();
+    }).catch(error => console.error("Erreur :", error));
+});
+</script>
+
+</body>
+</html>
